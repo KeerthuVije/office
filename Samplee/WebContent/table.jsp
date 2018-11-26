@@ -22,7 +22,7 @@
 	
 	function myFunction() {
 	    var x = document.getElementById("tblList").value;
-	    document.getElementById("view").innerHTML = x;
+	    document.getElementById("demo").innerHTML = x;
 	}
 </script>
 <script>
@@ -75,7 +75,6 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
         div.insertAdjacentHTML("beforeend", strDOM);
       }
  </script>
- 
 <style >
 .button1 {background-color: #4CAF50;} 
 .button2 {
@@ -97,7 +96,6 @@ header {
     font-size: 30px;
     color: white;
 }
-
 </style>
 </head>
 <body>
@@ -149,17 +147,18 @@ header {
 			</td>
 			<td>
 			<button id="getSelectsBtn">GetSelects</button>
-			<script>
+			<!-- <script>
         		$("select").multipleSelect();
         		$("#getSelectsBtn").click(function() {
         			alert("Selected values: " + $("select").multipleSelect("getSelects"));
             		alert("Selected texts: " + $("select").multipleSelect("getSelects", "text"));
         		});
-    		</script>
+    		</script> -->
 			</td>
 			</table>
-		<div id="tablesDiv">
 		<h1><font size="6">Select Conditions </font></h1>
+		<br>
+		<div id="tablesDiv">
 		<table id="table">
 			<td>
 				<select id="colunm" name="select">
@@ -197,14 +196,17 @@ header {
 				<ul>				
 					<input type="hidden" name="page2" value="submit">
 					<button onclick="onPlusClick();" class="button button1"> + </button>				
+				
 				</ul>
 			</td>
 		</tr>	
 	</table>
-	 </div>	
-	<table id="demo">
-	<tr><td><button onclick="myFunction();" class="button button2"> Generate Query </button></td></tr>
+	 </div>
+	 <div>
+	 <table>
+	 	<tr><button onclick="myFunction();" class="button button2">Generate Query</button></tr>
 	 </table>
-	 <p id="view"> </p></div>	
+	 <p id="demo"></p>
+	 </div>
 </body>
 </html>
