@@ -133,6 +133,7 @@
 			</td>
 		</tr>	
 	</table>
+	<div>
 	<table id="demo">
 	 </table>									
 </body>
