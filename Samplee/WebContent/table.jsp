@@ -27,6 +27,17 @@
 	    document.getElementById("demo").innerHTML = x; 
 	}
 </script>
+<script>
+      function onPlusClick() {
+        var strDOM =
+          "<table><tr>" +
+          "<td><select ><option >select</option></select></td>" +
+          "<td><input type='button' value='+' onclick='onPlusClick()' /></td>" +
+          "</tr></table>";
+        var div = document.getElementById("tablesDiv");
+        div.insertAdjacentHTML("beforeend", strDOM);
+      }
+ </script>
 <style >
 .button1 {background-color: #4CAF50;} 
 </style>
@@ -80,7 +91,7 @@
 
 			</table>
 		<br>
-		
+		<div id="tablesDiv">
 		<table id="table">
 			<td>
 				<select id="colunm" name="select">
@@ -117,7 +128,7 @@
 			<td>
 				<ul>				
 					<input type="hidden" name="page2" value="submit">
-					<button onclick="create();" class="button button1"> + </button>				
+					<button onclick="onclick();" class="button button1"> + </button>				
 				</ul>
 			</td>
 		</tr>	
