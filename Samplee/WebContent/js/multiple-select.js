@@ -676,7 +676,7 @@
         }
     };
 
-    $.fn.multipleSelect = function () {
+    $.fn.multipleSelect= function () {
         var option = arguments[0],
             args = arguments,
 
