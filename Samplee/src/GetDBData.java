@@ -27,7 +27,7 @@ public class GetDBData {
 		try {			
 			Connection con = DBConnection.ConnectDb();
 		    Statement state1 = con.createStatement();
-		    String query = " SELECT column_name FROM all_tab_cols WHERE table_name = '"+ selecttable +"' ";
+		    String query = " SELECT DISTINCT column_name FROM all_tab_cols WHERE table_name = '"+ selecttable +"' ";
 		    System.out.println(query);
 		    ResultSet result1;		      
 		    result1 = state1.executeQuery(query);

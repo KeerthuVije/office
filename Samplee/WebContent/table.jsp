@@ -8,6 +8,7 @@
 <head>
 	<link rel="stylesheet" href="css/bootstrap.css" />
  	<link href="css/multiple-select.css" rel="stylesheet"/>
+ 	<script src="js/jquery-3.3.1.min.js"></script>
  	<script src="js/jquery.min.js"></script>
  	<script src="js/multiple-select.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -32,7 +33,7 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
       function onPlusClick() {
         var strDOM =`<table id="table">
 			<td>
-			<select id="colunm" name="select">
+			<select id="colunms" name="select">
 			<option value = ""> -- Select -- </option>
 				<%for(int i = 0; i < listc.size(); i++){ 
 						String columns = listc.get(i);%>
@@ -42,7 +43,7 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
 		</td>
 		<td>
 			<ul>
-				<select>
+				<select id="option">
 					<option value= ">"> > </option>
 					<option value= "<"> < </option>
 					<option value= "="> = </option>
@@ -75,6 +76,46 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
         div.insertAdjacentHTML("beforeend", strDOM);
       }
  </script>
+ <!-- <script>
+      $(document).ready(() => {
+        $("#butCreateQuery").click(event => {
+          var selectedTable = $("#tblList").val();
+          var selectedColumns = $("#colunm").val();
+      ///    var query = "SELECT "+${selectedColumns}+" FROM"+ ${selectedTable};
+      	var t =  $('#tblList :selected').text();
+     	var c =  $('#colunm :selected').text();
+       	var query = "Select "+ c +" From "+ t;
+       	var p = document.createElement("p");
+        var node = document.createTextNode(query);
+        p.appendChild(node);
+        document.body.appendChild(p);
+        document.getElementById("demo").appendChild(p);
+          
+        });
+      });
+    </script> -->
+   <script>
+      function onButCreateQueryClick() {
+        var selectedTable = document.getElementById("tblList").value;
+        var columnsSelect = document.getElementById("colunm");
+        var selectOptions = columnsSelect.options;
+        var selectedColumns = [];
+        for(var i = 0;i<selectOptions.length;i++)
+        {
+          var opt = selectOptions[i];
+          if(opt.selected)
+            selectedColumns.push(opt.value);
+        }
+        var selectedCondition = document.getElementById("colunms").value;
+        var selectedCondition = document.getElementById("option").value;
+        var query = "SELECT " + selectedColumns + " FROM " + selectedTable;
+        var p = document.createElement("p");
+        var node = document.createTextNode(query);
+        p.appendChild(node);
+        document.body.appendChild(p);
+        document.getElementById("demo").appendChild(p); 
+      }
+    </script>
 <style >
 .button1 {background-color: #4CAF50;} 
 .button2 {
@@ -103,11 +144,10 @@ header {
 	  List<String> list = (ArrayList<String>) request.getAttribute("last_table");
 	%>
 	<header><h1> Customized Report Progress </h1></header>
-		<!-- <div align="center" onmouseover="this.style.backgroundColor='yellow'"><b><font size="5"> Customized Report Progress</font></b></div> -->
 	<table>
 		<tr>
 			<td>
-			<h1><b><font size="4"> Tables</b></font></h1>
+				<h1><b><font size="4"> Tables</b></font></h1>
 				<select id="tblList" name="tblList" onChange="getSelectValue();">		
 					<option value = ""> -- Select -- </option>
 						<%for(int i = 0; i < list.size(); i++){ 
@@ -119,7 +159,7 @@ header {
 				&nbsp;
 			</td>
 			<td>
-			<h1><b><font size="4"> Selected Table</b></font></h1>
+				<h1><b><font size="4"> Selected Table</b></font></h1>
 				<form id="form1" action="LoginCheckController" method="get">
 						<input type="hidden" name="page" value="submit">
 						<input type="hidden" id="selecttable" name="selecttable" value="">						
@@ -128,8 +168,8 @@ header {
 			&nbsp;
 			</td>
 			<td>
-			<ul>
-			<h1><b><font size="4"> Columns </b></font></h1>
+				<ul>
+				<h1><b><font size="4"> Columns </b></font></h1>
 				 <select id="colunm" name="select" multiple="multiple">
 					<%for(int i = 0; i < listc.size(); i++){ 
 							String columns = listc.get(i);%>
@@ -145,23 +185,13 @@ header {
 			    &nbsp;
 			    </ul>		
 			</td>
-			<td>
-			<button id="getSelectsBtn">GetSelects</button>
-			<!-- <script>
-        		$("select").multipleSelect();
-        		$("#getSelectsBtn").click(function() {
-        			alert("Selected values: " + $("select").multipleSelect("getSelects"));
-            		alert("Selected texts: " + $("select").multipleSelect("getSelects", "text"));
-        		});
-    		</script> -->
-			</td>
 			</table>
 		<h1><font size="6">Select Conditions </font></h1>
 		<br>
 		<div id="tablesDiv">
 		<table id="table">
 			<td>
-				<select id="colunm" name="select">
+				<select id="colunms" name="select">
 				<option value = ""> -- Select -- </option>
 					<%for(int i = 0; i < listc.size(); i++){ 
 							String columns = listc.get(i);%>
@@ -171,7 +201,8 @@ header {
 			</td>
 			<td>
 				<ul>
-					<select>
+					<select id="option">
+						<option value = ""> -- Select -- </option>
 						<option value= ">"> > </option>
 						<option value= "<"> < </option>
 						<option value= "="> = </option>
@@ -198,15 +229,16 @@ header {
 					<button onclick="onPlusClick();" class="button button1"> + </button>				
 				
 				</ul>
-			</td>
-		</tr>	
+			</td>	
 	</table>
 	 </div>
 	 <div>
 	 <table>
-	 	<tr><button onclick="myFunction();" class="button button2">Generate Query</button></tr>
+	 	<tr><button id="butCreateQuery" onclick="onButCreateQueryClick()" class="button button2">Generate Query</button></tr>
+	 	<div id="demo"></div>
+	 	<td><button class="button button2">Submit</button></td>
+	 	</tr>
 	 </table>
-	 <p id="demo"></p>
 	 </div>
 </body>
 </html>
