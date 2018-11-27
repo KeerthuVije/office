@@ -237,6 +237,7 @@ header {
 	 	<tr><button id="butCreateQuery" onclick="onButCreateQueryClick()" class="button button2">Generate Query</button></tr>
 	 	<div id="demo"></div>
 	 	<td><button class="button button2">Submit</button></td>
+	 	<td><button class="button button2">Get Report</button></td>
 	 	</tr>
 	 </table>
 	 </div>
