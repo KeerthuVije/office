@@ -8,6 +8,8 @@
 <head>
 	<link rel="stylesheet" href="css/bootstrap.css" />
  	<link href="css/multiple-select.css" rel="stylesheet"/>
+ 	<link href="https://cdn.syncfusion.com/ej2/material.css" rel="stylesheet">
+ 	<script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
  	<script src="js/jquery-3.3.1.min.js"></script>
  	<script src="js/jquery.min.js"></script>
  	<script src="js/multiple-select.js"></script>
@@ -20,17 +22,12 @@
 		document.getElementById("selecttable").value = selected_table;	
 		document.getElementById("form1").submit();
 	}
-	
-	function myFunction() {
-	    var x = document.getElementById("tblList").value;
-	    document.getElementById("demo").innerHTML = x;
-	}
 </script>
 <script>
 <%
 List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
 %>
-      function onPlusClick() {
+		function onPlusClick(){
         var strDOM =`<table id="table">
 			<td>
 			<select id="colunms" name="select">
@@ -44,6 +41,7 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
 		<td>
 			<ul>
 				<select id="option">
+				<option value = ""> -- Select -- </option>
 					<option value= ">"> > </option>
 					<option value= "<"> < </option>
 					<option value= "="> = </option>
@@ -64,6 +62,8 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
 				Value : <input type="text" name="value">
 			</ul>
 		</td>
+		<td>		
+		</td>
 		<td>
 			<ul>				
 				<input type="hidden" name="page2" value="submit">
@@ -74,14 +74,15 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
 </table>`
         var div = document.getElementById("tablesDiv");
         div.insertAdjacentHTML("beforeend", strDOM);
-      }
+        /* var length = $('#colunm').children('option').length; */
+    	 }
  </script>
  <!-- <script>
       $(document).ready(() => {
         $("#butCreateQuery").click(event => {
-          var selectedTable = $("#tblList").val();
-          var selectedColumns = $("#colunm").val();
-      ///    var query = "SELECT "+${selectedColumns}+" FROM"+ ${selectedTable};
+          //var selectedTable = $("#tblList").val();
+          //var selectedColumns = $("#colunm").val();
+      	  //var query = "SELECT "+${selectedColumns}+" FROM"+ ${selectedTable};
       	var t =  $('#tblList :selected').text();
      	var c =  $('#colunm :selected').text();
        	var query = "Select "+ c +" From "+ t;
@@ -113,7 +114,7 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
         var node = document.createTextNode(query);
         p.appendChild(node);
         document.body.appendChild(p);
-        document.getElementById("demo").appendChild(p); 
+        document.getElementById("query").appendChild(p); 
       }
     </script>
 <style >
@@ -186,10 +187,10 @@ header {
 			    </ul>		
 			</td>
 			</table>
-		<h1><font size="6">Select Conditions </font></h1>
-		<br>
+		<h1><b><font size="5">Select Conditions </font></b></h1>
 		<div id="tablesDiv">
 		<table id="table">
+		<tr>
 			<td>
 				<select id="colunms" name="select">
 				<option value = ""> -- Select -- </option>
@@ -225,21 +226,68 @@ header {
 			</td>
 			<td>
 				<ul>				
-					<input type="hidden" name="page2" value="submit">
+					<!-- <input type="hidden" name="page2" value="submit"> -->
 					<button onclick="onPlusClick();" class="button button1"> + </button>				
 				
 				</ul>
-			</td>	
+			</td>
+			</tr>
 	</table>
 	 </div>
 	 <div>
 	 <table>
-	 	<tr><button id="butCreateQuery" onclick="onButCreateQueryClick()" class="button button2">Generate Query</button></tr>
-	 	<div id="demo"></div>
-	 	<td><button class="button button2">Submit</button></td>
+	 <tr>
+	 	<td> 
+	 			<h1><b><font size="5"> Group By </b></font></h1>
+	 			<select id="groupby" name="select" multiple="multiple">
+					<%for(int i = 0; i < listc.size(); i++){ 
+							String columns = listc.get(i);%>
+						<option value="<%=columns %>"><%= columns%></option>	
+				<%} %>
+				</select> 
+				
+			    <script>
+			        $("#groupby").multipleSelect({
+			            filter: true
+			        });
+			    </script>
+			</td>
+		</tr>
+		<td> 
+	 			<h1><b><font size="5"> Order By </b></font></h1>
+	 			<select id="orderby" name="select" multiple="multiple">
+					<%for(int i = 0; i < listc.size(); i++){ 
+							String columns = listc.get(i);%>
+						<option value="<%=columns %>"><%= columns%></option>	
+				<%} %>
+				</select> 
+				
+			    <script>
+			        $("#orderby").multipleSelect({
+			            filter: true
+			        });
+			    </script>
+			    &nbsp;
+			</td>	
+	 	<tr><td><button id="butCreateQuery" onclick="onButCreateQueryClick()" class="button button2">Generate Query</button></td></tr>
+	 	<td><div id="query"></div></td>
+	 	<tr><td><button class="button button2">Submit</button></td></tr>
 	 	<td><button class="button button2">Get Report</button></td>
+	 	<!-- <td><input id="datepicker" type="text">
+    		<script>
+        		var datepicker = new ej.calendars.DatePicker({ width: "200px" });
+        		datepicker.appendTo('#datepicker');
+    		</script>
+    	</td> -->
 	 	</tr>
 	 </table>
 	 </div>
+	 <%-- <table id="border">
+	<c:forEach var="row" query="${result.rows}">
+	<tr>
+	<td><c:out value="${row.selectedColumns}"/></td>
+	</tr>
+	</c:forEach>
+	</table> --%>
 </body>
 </html>
