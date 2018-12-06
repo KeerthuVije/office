@@ -51,7 +51,7 @@ public class LoginCheckController extends HttpServlet {
 		}
 		
 		List<String> c = table.getTableColumns(selecttable);
-		request.setAttribute("column_names", c);
+		request.setAttribute("column_names", c);	
 		
 		List<String> a = table.getTables();
 		request.setAttribute("last_table", a);

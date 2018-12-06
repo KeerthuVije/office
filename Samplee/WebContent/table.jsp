@@ -14,6 +14,9 @@
  	<script src="js/jquery.min.js"></script>
  	<script src="js/multiple-select.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>Tables</title>
 <script>
 	function getSelectValue(){
@@ -24,11 +27,27 @@
 	}
 </script>
 <script>
+	function test(){
+		var le = $('#colunm').children('option').length;
+		if(le==4){
+			alert(a)
+		}
+		else{
+			alert(b)
+		}
+	}
+</script>    	
+<script>
+	var clicks = 1;
+	var length = $('#colunm').children('option').length;
 <%
 List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
 %>
-		function onPlusClick(){
-        var strDOM =`<table id="table">
+		function onPlusClick(){	
+			clicks += 1;
+			var id = "";
+			document.getElementById("clicks").innerHTML = clicks;
+        	var strDOM =`<table id="table">
 			<td>
 			<select id="colunms" name="select">
 			<option value = ""> -- Select -- </option>
@@ -62,21 +81,24 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
 				Value : <input type="text" name="value">
 			</ul>
 		</td>
-		<td>		
-		</td>
+		<td><input id="datepicker`+clicks+`" type="text">
+			<script>
+			
+    		var datepicker = new ej.calendars.DatePicker({ width: "200px" });
+    		datepicker.appendTo('#datepicker`+clicks+`');
+    		<\/script>
+	</td>
 		<td>
 			<ul>				
-				<input type="hidden" name="page2" value="submit">
-				<button onclick="onPlusClick();" class="button button1"> + </button>				
+				<button onclick="onPlusClick();" class="button button1"> + </button>			
 			</ul>
 		</td>
 	</tr>	
 </table>`
         var div = document.getElementById("tablesDiv");
         div.insertAdjacentHTML("beforeend", strDOM);
-        /* var length = $('#colunm').children('option').length; */
-    	 }
- </script>
+		}
+ </script> 
  <!-- <script>
       $(document).ready(() => {
         $("#butCreateQuery").click(event => {
@@ -144,7 +166,10 @@ header {
 	<%	
 	  List<String> list = (ArrayList<String>) request.getAttribute("last_table");
 	%>
-	<header><h1> Customized Report Progress </h1></header>
+	<div class="w3-container">
+	<header><h1>Customized Report Progress</h1></header>
+	<p><i class="fa fa-spinner w3-spin" style="font-size:64px"></i></p>
+	</div>
 	<table>
 		<tr>
 			<td>
@@ -176,8 +201,7 @@ header {
 							String columns = listc.get(i);%>
 						<option value="<%=columns %>"><%= columns%></option>	
 				<%} %>
-				</select> 
-				
+				</select> 				
 			    <script>
 			        $("#colunm").multipleSelect({
 			            filter: true
@@ -224,9 +248,14 @@ header {
 					Value : <input type="text" name="value">
 				</ul>
 			</td>
+			<td><input id="datepicker" type="text">
+    		<script>
+        		var datepicker = new ej.calendars.DatePicker({ width: "200px" });
+        		datepicker.appendTo('#datepicker');
+    		</script>
+    	</td>
 			<td>
 				<ul>				
-					<!-- <input type="hidden" name="page2" value="submit"> -->
 					<button onclick="onPlusClick();" class="button button1"> + </button>				
 				
 				</ul>
@@ -234,6 +263,7 @@ header {
 			</tr>
 	</table>
 	 </div>
+	 
 	 <div>
 	 <table>
 	 <tr>
@@ -271,23 +301,11 @@ header {
 			</td>	
 	 	<tr><td><button id="butCreateQuery" onclick="onButCreateQueryClick()" class="button button2">Generate Query</button></td></tr>
 	 	<td><div id="query"></div></td>
-	 	<tr><td><button class="button button2">Submit</button></td></tr>
+	 	<tr><td><button onclick="test()" class="button button2">Submit</button></td></tr>
 	 	<td><button class="button button2">Get Report</button></td>
-	 	<!-- <td><input id="datepicker" type="text">
-    		<script>
-        		var datepicker = new ej.calendars.DatePicker({ width: "200px" });
-        		datepicker.appendTo('#datepicker');
-    		</script>
-    	</td> -->
 	 	</tr>
 	 </table>
 	 </div>
-	 <%-- <table id="border">
-	<c:forEach var="row" query="${result.rows}">
-	<tr>
-	<td><c:out value="${row.selectedColumns}"/></td>
-	</tr>
-	</c:forEach>
-	</table> --%>
+    <p>Clicks: <a id="clicks">0</a></p>
 </body>
 </html>

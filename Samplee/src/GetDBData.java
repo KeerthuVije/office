@@ -27,17 +27,18 @@ public class GetDBData {
 		try {			
 			Connection con = DBConnection.ConnectDb();
 		    Statement state1 = con.createStatement();
-		    String query = " SELECT DISTINCT column_name FROM all_tab_cols WHERE table_name = '"+ selecttable +"' ";
+		    String query = " SELECT DISTINCT column_name,data_type FROM all_tab_cols WHERE table_name = '"+ selecttable +"' ";
 		    ResultSet result1;		      
 		    result1 = state1.executeQuery(query);
 		    while (result1.next()) {			        	  
-		    	//System.out.println( result1.getString("column_name"));		   
-		    	getColumns.add( result1.getString("column_name"));		    			    	
+		    	System.out.println( result1.getString("column_name")+ " " + result1.getString("data_type"));		   
+		    	getColumns.add( result1.getString("column_name"));
+		    	String s = result1.getString(2);
+		    	System.out.println(s);
 		    }		           		          
 		}catch(Exception e) {
 			System.err.println(e);
 		}
 		return getColumns;
 	}
-	
 }
