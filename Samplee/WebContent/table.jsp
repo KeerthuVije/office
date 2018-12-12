@@ -29,27 +29,33 @@
 <script>
 	function test(){
 		var le = $('#colunm').children('option').length;
-		if(le==4){
-			alert(a)
-		}
-		else{
-			alert(b)
-		}
+			alert(le)
 	}
 </script>    	
 <script>
-	var clicks = 1;
-	var length = $('#colunm').children('option').length;
+	var clicks = 0;
+	 var count = 0;
+     var rowCount = 1;
+	document.addEventListener(
+	        "DOMContentLoaded",
+	        function() {
+	          count = document.getElementById("colunm").options.length;
+	          console.log(count);
+	        },
+	        true
+	      );
 <%
 List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
 %>
 		function onPlusClick(){	
 			clicks += 1;
-			var id = "";
-			document.getElementById("clicks").innerHTML = clicks;
+			if (count <= rowCount)
+		          document.getElementById("addButton").disabled = true;
+		        else {
+		        	var div = document.getElementById("tablesDiv");
         	var strDOM =`<table id="table">
 			<td>
-			<select id="colunms" name="select">
+			<select id="colunms`+clicks+`" name="select">
 			<option value = ""> -- Select -- </option>
 				<%for(int i = 0; i < listc.size(); i++){ 
 						String columns = listc.get(i);%>
@@ -59,7 +65,7 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
 		</td>
 		<td>
 			<ul>
-				<select id="option">
+				<select id="option`+clicks+`">
 				<option value = ""> -- Select -- </option>
 					<option value= ">"> > </option>
 					<option value= "<"> < </option>
@@ -78,26 +84,17 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
 		</td>
 		<td>
 			<ul>
-				Value : <input type="text" name="value">
+				Value : <input id="text`+clicks+`" type="text" name="value">
 			</ul>
 		</td>
-		<td><input id="datepicker`+clicks+`" type="text">
-			<script>
-			
-    		var datepicker = new ej.calendars.DatePicker({ width: "200px" });
-    		datepicker.appendTo('#datepicker`+clicks+`');
-    		<\/script>
-	</td>
-		<td>
-			<ul>				
-				<button onclick="onPlusClick();" class="button button1"> + </button>			
-			</ul>
-		</td>
+		<td><ul><input id="datepicker`+clicks+`" type="date"></ul></td>
+		<td><ul><input id="number" type="number"></ul></td>
 	</tr>	
 </table>`
-        var div = document.getElementById("tablesDiv");
         div.insertAdjacentHTML("beforeend", strDOM);
+        rowCount++;
 		}
+	}
  </script> 
  <!-- <script>
       $(document).ready(() => {
@@ -116,7 +113,7 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
           
         });
       });
-    </script> -->
+   </script> -->
    <script>
       function onButCreateQueryClick() {
         var selectedTable = document.getElementById("tblList").value;
@@ -140,7 +137,10 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
       }
     </script>
 <style >
-.button1 {background-color: #4CAF50;} 
+.button1 {
+	background-color: #4CAF50;
+	font-size: 20px;
+} 
 .button2 {
     background-color: white; 
     color: black; 
@@ -245,18 +245,14 @@ header {
 			</td>
 			<td>
 				<ul>
-					Value : <input type="text" name="value">
+					Value : <input id="text" type="text" name="value">
 				</ul>
 			</td>
-			<td><input id="datepicker" type="text">
-    		<script>
-        		var datepicker = new ej.calendars.DatePicker({ width: "200px" });
-        		datepicker.appendTo('#datepicker');
-    		</script>
-    	</td>
+			<td><ul><input id="datepicker" type="date"></ul></td>
+			<td><ul><input id="number" type="number"></ul></td>
 			<td>
 				<ul>				
-					<button onclick="onPlusClick();" class="button button1"> + </button>				
+					<button onclick="onPlusClick();" class="button button1" id="addButton"> + </button>				
 				
 				</ul>
 			</td>
@@ -268,7 +264,7 @@ header {
 	 <table>
 	 <tr>
 	 	<td> 
-	 			<h1><b><font size="5"> Group By </b></font></h1>
+	 		<h1><b><font size="5"> Group By </b></font></h1>
 	 			<select id="groupby" name="select" multiple="multiple">
 					<%for(int i = 0; i < listc.size(); i++){ 
 							String columns = listc.get(i);%>
@@ -281,10 +277,10 @@ header {
 			            filter: true
 			        });
 			    </script>
-			</td>
-		</tr>
+		</td>
+	</tr>
 		<td> 
-	 			<h1><b><font size="5"> Order By </b></font></h1>
+	 		<h1><b><font size="5"> Order By </b></font></h1>
 	 			<select id="orderby" name="select" multiple="multiple">
 					<%for(int i = 0; i < listc.size(); i++){ 
 							String columns = listc.get(i);%>
@@ -298,14 +294,16 @@ header {
 			        });
 			    </script>
 			    &nbsp;
-			</td>	
-	 	<tr><td><button id="butCreateQuery" onclick="onButCreateQueryClick()" class="button button2">Generate Query</button></td></tr>
+		</td>	
+	 <tr>
+	 	<td><button id="butCreateQuery" onclick="onButCreateQueryClick()" class="button button2">Generate Query</button></td>
+	 </tr>
 	 	<td><div id="query"></div></td>
-	 	<tr><td><button onclick="test()" class="button button2">Submit</button></td></tr>
+	 <tr>
+	 	<td><button onclick="test()" class="button button2">Submit</button></td>
+	 </tr>
 	 	<td><button class="button button2">Get Report</button></td>
-	 	</tr>
 	 </table>
 	 </div>
-    <p>Clicks: <a id="clicks">0</a></p>
 </body>
 </html>
