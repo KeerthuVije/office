@@ -31,7 +31,37 @@
 		var le = $('#colunm').children('option').length;
 			alert(le)
 	}
-</script>    	
+</script>
+<script>
+var count = 0;
+var rowCount = 0;
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+    count = document.getElementById("colunms").options.length;
+    console.log(count);
+  },
+  true
+);
+
+function addRow() {
+  console.log(count, rowCount);
+  if (count <= rowCount)
+    document.getElementById("addButton").disabled = true;
+  else {
+    var rowsGoHereDiv = document.getElementById("rowsGoHere");
+    var selectedValue = document.getElementById("colunms").value;
+    var innerHTML = null;
+
+    if (selectedValue.includes("_DATE"))
+      insertHTML = `<div><input type="date" name="" id=""></div>`;
+    else insertHTML = `<div><input type="text" name="" id=""></div>`;
+
+    rowsGoHereDiv.insertAdjacentHTML("beforeend", insertHTML);
+    rowCount++;
+  }
+}
+</script>   	
 <script>
 	var clicks = 0;
 	 var count = 0;
@@ -109,8 +139,7 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
         var node = document.createTextNode(query);
         p.appendChild(node);
         document.body.appendChild(p);
-        document.getElementById("demo").appendChild(p);
-          
+        document.getElementById("demo").appendChild(p);  
         });
       });
    </script> -->
@@ -304,6 +333,15 @@ header {
 	 </tr>
 	 	<td><button class="button button2">Get Report</button></td>
 	 </table>
+	 <button onclick="addRow()" id="addButton">+</button>
+    <select id="colunms" name="select">
+				<option value = ""> -- Select -- </option>
+					<%for(int i = 0; i < listc.size(); i++){ 
+							String columns = listc.get(i);%>
+						<option value="<%=columns %>"><%= columns%></option>	
+				<%} %>
+				</select> 
+    <div id="rowsGoHere"></div>
 	 </div>
 </body>
 </html>
