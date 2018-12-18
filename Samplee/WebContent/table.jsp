@@ -329,7 +329,7 @@ header {
 	 </tr>
 	 	<td><div id="query"></div></td>
 	 <tr>
-	 	<td><button onclick="test()" class="button button2">Submit</button></td>
+	 	<td><button class="button button2">Submit</button></td>
 	 </tr>
 	 	<td><button class="button button2">Get Report</button></td>
 	 </table>
