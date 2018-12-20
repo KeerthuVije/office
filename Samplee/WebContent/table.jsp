@@ -399,9 +399,9 @@ header {
 	 	<form id="form2" action="LoginCheckController" method="get">
 		<input type="hidden" name="page2" value="submit"></div></td>
 		<%=request.getAttribute("query")!=null ? request.getAttribute("query"):""  %>
-	 <tr>
+	 <!-- <tr>
 	 	<td><button class="button button2">Submit</button></td>
-	 </tr>
+	 </tr> -->
 	 	<td><button class="button button2">Get Report</button></td>
 	 </table>
 	 </div>
