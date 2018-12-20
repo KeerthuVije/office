@@ -27,42 +27,99 @@
 	}
 </script>
 <script>
-	function test(){
-		var le = $('#colunm').children('option').length;
-			alert(le)
-	}
-</script>
-<script>
-var count = 0;
-var rowCount = 0;
+var clicks = 0;
+var length = 0;
+var rowCounts = 1;
 document.addEventListener(
-  "DOMContentLoaded",
-  function() {
-    count = document.getElementById("colunms").options.length;
-    console.log(count);
-  },
-  true
-);
+       "DOMContentLoaded",
+       function() {
+    	   length = document.getElementById("cols").options.length;
+       },
+       true
+     );
+
+<%
+List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
+%>
 
 function addRow() {
-  console.log(count, rowCount);
-  if (count <= rowCount)
-    document.getElementById("addButton").disabled = true;
+	clicks += 1;
+  if (length <= rowCounts)
+    document.getElementById("addB").disabled = true;
   else {
     var rowsGoHereDiv = document.getElementById("rowsGoHere");
-    var selectedValue = document.getElementById("colunms").value;
+    var selectedValue = document.getElementById("cols").value;
+    alert(selectedValue)
+    var p = document.createElement("Label");
+    p.id = "label`+clicks+`";
+        var node = document.createTextNode(selectedValue);
+        p.appendChild(node);
+        document.body.appendChild(p);
+        document.getElementById("rowsGoHere").appendChild(p);
     var innerHTML = null;
-
-    if (selectedValue.includes("_DATE"))
-      insertHTML = `<div><input type="date" name="" id=""></div>`;
-    else insertHTML = `<div><input type="text" name="" id=""></div>`;
-
+    if (selectedValue.includes("DATE"))
+      insertHTML = `<div>
+				    	  <table id="table1">
+					    	  <tr>
+								<td>
+									<ul>
+										<select id="option`+clicks+`">
+											<option value = ""> -- Select -- </option>
+											<option value= ">"> > </option>
+											<option value= "<"> < </option>
+											<option value= "="> = </option>
+											<option value= "<="> <= </option>
+											<option value= ">="> >= </option>
+											<option value= "<>"> <> </option>
+											<option value= "Like"> Like </option>
+											<option value= "Between"> Between </option>
+											<option value= "ISNULL"> IS NULL </option>
+											<option value= "ISNOTNULL"> IS NOT NULL </option>
+											<option value= "IN"> IN </option>
+											<option value= "NOTIN"> NOT IN </option>
+										</select>
+									</ul>
+								</td>
+								<td><ul><input id="datepicker`+clicks+`" type="date"></ul></td>
+							</tr>	
+						</table>
+      				</div>`
+    else insertHTML = `<div>
+						   <table id="table2">
+						  	  <tr>
+									<td>
+										<ul>
+											<select id="option`+clicks+`">
+												<option value = ""> -- Select -- </option>
+												<option value= ">"> > </option>
+												<option value= "<"> < </option>
+												<option value= "="> = </option>
+												<option value= "<="> <= </option>
+												<option value= ">="> >= </option>
+												<option value= "<>"> <> </option>
+												<option value= "Like"> Like </option>
+												<option value= "Between"> Between </option>
+												<option value= "ISNULL"> IS NULL </option>
+												<option value= "ISNOTNULL"> IS NOT NULL </option>
+												<option value= "IN"> IN </option>
+												<option value= "NOTIN"> NOT IN </option>
+											</select>
+										</ul>
+									</td>
+									<td>
+									<ul>
+										Value : <input id="text`+clicks+`" type="text" name="value">
+									</ul>
+								</td>
+								</tr>	
+							</table>
+    					</div>`
     rowsGoHereDiv.insertAdjacentHTML("beforeend", insertHTML);
-    rowCount++;
+    rowCounts++;
   }
 }
 </script>   	
-<script>
+<%-- <script>
 	var clicks = 0;
 	 var count = 0;
      var rowCount = 1;
@@ -70,7 +127,6 @@ function addRow() {
 	        "DOMContentLoaded",
 	        function() {
 	          count = document.getElementById("colunm").options.length;
-	          console.log(count);
 	        },
 	        true
 	      );
@@ -125,7 +181,7 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
         rowCount++;
 		}
 	}
- </script> 
+ </script> --%> 
  <!-- <script>
       $(document).ready(() => {
         $("#butCreateQuery").click(event => {
@@ -144,7 +200,9 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
       });
    </script> -->
    <script>
+   var clicks = 0;
       function onButCreateQueryClick() {
+    	  clicks += 1;
         var selectedTable = document.getElementById("tblList").value;
         var columnsSelect = document.getElementById("colunm");
         var selectOptions = columnsSelect.options;
@@ -155,14 +213,15 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
           if(opt.selected)
             selectedColumns.push(opt.value);
         }
-        var selectedCondition = document.getElementById("colunms").value;
-        var selectedCondition = document.getElementById("option").value;
         var query = "SELECT " + selectedColumns + " FROM " + selectedTable;
+        alert(query)
         var p = document.createElement("p");
+        p.setAttribute("id", "para");
         var node = document.createTextNode(query);
         p.appendChild(node);
         document.body.appendChild(p);
-        document.getElementById("query").appendChild(p); 
+        document.getElementById("divquery").appendChild(p);
+        /* document.getElementById("form2").submit(); */
       }
     </script>
 <style >
@@ -241,7 +300,16 @@ header {
 			</td>
 			</table>
 		<h1><b><font size="5">Select Conditions </font></b></h1>
-		<div id="tablesDiv">
+		<button onclick="addRow()" id="addB" class="button button1">+</button>
+    	<select id="cols" name="select">
+					<option value = ""> -- Select -- </option>
+					<%for(int i = 0; i < listc.size(); i++){ 
+							String columns = listc.get(i);%>
+						<option value="<%=columns %>"><%= columns%></option>	
+				<%} %>
+				</select>
+    	<div id="rowsGoHere"></div>
+		<%-- <div id="tablesDiv">
 		<table id="table">
 		<tr>
 			<td>
@@ -287,7 +355,7 @@ header {
 			</td>
 			</tr>
 	</table>
-	 </div>
+	 </div> --%>
 	 
 	 <div>
 	 <table>
@@ -327,21 +395,15 @@ header {
 	 <tr>
 	 	<td><button id="butCreateQuery" onclick="onButCreateQueryClick()" class="button button2">Generate Query</button></td>
 	 </tr>
-	 	<td><div id="query"></div></td>
+	 	<td><div id="divquery">
+	 	<form id="form2" action="LoginCheckController" method="get">
+		<input type="hidden" name="page2" value="submit"></div></td>
+		<%=request.getAttribute("query")!=null ? request.getAttribute("query"):""  %>
 	 <tr>
 	 	<td><button class="button button2">Submit</button></td>
 	 </tr>
 	 	<td><button class="button button2">Get Report</button></td>
 	 </table>
-	 <button onclick="addRow()" id="addButton">+</button>
-    <select id="colunms" name="select">
-				<option value = ""> -- Select -- </option>
-					<%for(int i = 0; i < listc.size(); i++){ 
-							String columns = listc.get(i);%>
-						<option value="<%=columns %>"><%= columns%></option>	
-				<%} %>
-				</select> 
-    <div id="rowsGoHere"></div>
 	 </div>
 </body>
 </html>

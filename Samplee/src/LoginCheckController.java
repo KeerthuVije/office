@@ -43,11 +43,20 @@ public class LoginCheckController extends HttpServlet {
 	
 	private void prosses(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {				
 		String selecttable = "";
+		String query="";
 		GetDBData table = new GetDBData();
+		
 		if(request.getParameter("page") != null && request.getParameter("page").equals("submit")) {
 			selecttable = request.getParameter("selecttable");
 			table.getTableColumns(selecttable);
 			request.setAttribute("selecttable",selecttable);
+			System.out.println(selecttable);
+		}
+		
+		if(request.getParameter("page2") != null && request.getParameter("page2").equals("submit")) {
+		query=request.getParameter("query");
+		request.setAttribute("query", query);
+		System.out.println(selecttable);
 		}
 		
 		List<String> c = table.getTableColumns(selecttable);
