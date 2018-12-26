@@ -46,18 +46,31 @@ public class LoginCheckController extends HttpServlet {
 		String query="";
 		GetDBData table = new GetDBData();
 		
+		String getQuery = request.getParameter("queryData");
+		
+		System.out.println("PRINT QUERY HERE : "+getQuery);
+		
 		if(request.getParameter("page") != null && request.getParameter("page").equals("submit")) {
 			selecttable = request.getParameter("selecttable");
 			table.getTableColumns(selecttable);
 			request.setAttribute("selecttable",selecttable);
 			System.out.println(selecttable);
-		}
+		} 
 		
-		if(request.getParameter("page2") != null && request.getParameter("page2").equals("submit")) {
-		query=request.getParameter("query");
-		request.setAttribute("query", query);
-		System.out.println(selecttable);
+		if(request.getParameter("data") != null && request.getParameter("data").equals("Generate Query")) {
+			System.out.println("passing data to this query : " + getQuery);
+		}else {
+			System.out.println("fail");
 		}
+		/*if(request.getParameter("queryData") != null && request.getParameter("queryData").equalsIgnoreCase("Generate Query")) {
+			
+		}*/
+		
+		/*if(request.getParameter("test") != null && request.getParameter("test").equals("yes")) {
+		System.out.println("fine");
+		}else {
+			System.out.println("Notfine");
+		}*/
 		
 		List<String> c = table.getTableColumns(selecttable);
 		request.setAttribute("column_names", c);	

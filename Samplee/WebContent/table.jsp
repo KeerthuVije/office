@@ -49,7 +49,6 @@ function addRow() {
   else {
     var rowsGoHereDiv = document.getElementById("rowsGoHere");
     var selectedValue = document.getElementById("cols").value;
-    alert(selectedValue)
     var p = document.createElement("Label");
     p.id = "label`+clicks+`";
         var node = document.createTextNode(selectedValue);
@@ -90,7 +89,7 @@ function addRow() {
 									<td>
 										<ul>
 											<select id="option`+clicks+`">
-												<option value = ""> -- Select -- </option>
+												<option value = ""> Select </option>
 												<option value= ">"> > </option>
 												<option value= "<"> < </option>
 												<option value= "="> = </option>
@@ -214,14 +213,19 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
             selectedColumns.push(opt.value);
         }
         var query = "SELECT " + selectedColumns + " FROM " + selectedTable;
-        alert(query)
         var p = document.createElement("p");
         p.setAttribute("id", "para");
+        p.setAttribute("name", "para");
         var node = document.createTextNode(query);
         p.appendChild(node);
         document.body.appendChild(p);
         document.getElementById("divquery").appendChild(p);
-        /* document.getElementById("form2").submit(); */
+        document.getElementById("data").value="Generate Query";
+        /* document.form2.submit(); */
+        document.getElementById("queryData").value = query;
+        document.getElementById("form2").submit();
+       
+        alert(query)
       }
     </script>
 <style >
@@ -276,7 +280,8 @@ header {
 				<h1><b><font size="4"> Selected Table</b></font></h1>
 				<form id="form1" action="LoginCheckController" method="get">
 						<input type="hidden" name="page" value="submit">
-						<input type="hidden" id="selecttable" name="selecttable" value="">						
+						<input type="hidden" id="selecttable" name="selecttable" value="">
+						<input type="hidden" id="test" name="test" value="yes">								
 					</form>
 			<%=request.getAttribute("selecttable")!=null ? request.getAttribute("selecttable"):""  %>
 			&nbsp;
@@ -393,16 +398,22 @@ header {
 			    &nbsp;
 		</td>	
 	 <tr>
-	 	<td><button id="butCreateQuery" onclick="onButCreateQueryClick()" class="button button2">Generate Query</button></td>
+	 	<td>
+	 		<form id="form2" action="LoginCheckController" method="get">
+	 		<input type="button" id="butCreateQuery" onclick="onButCreateQueryClick()" class="button button2" value="Generate Query">
+			<input type="hidden" id="data" name="data" value="">
+			<input type="hidden" id="queryData" name="queryData" value="">					
+			</form>
+		</td>
 	 </tr>
-	 	<td><div id="divquery">
-	 	<form id="form2" action="LoginCheckController" method="get">
-		<input type="hidden" name="page2" value="submit"></div></td>
-		<%=request.getAttribute("query")!=null ? request.getAttribute("query"):""  %>
+	 	<td><div id="divquery"></div>
 	 <!-- <tr>
 	 	<td><button class="button button2">Submit</button></td>
 	 </tr> -->
-	 	<td><button class="button button2">Get Report</button></td>
+	 <tr>
+	 	<td><button class="button button2">Get Report</button>
+	 </td>
+	 </tr>
 	 </table>
 	 </div>
 </body>
