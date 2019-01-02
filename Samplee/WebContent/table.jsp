@@ -221,10 +221,8 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
         document.body.appendChild(p);
         document.getElementById("divquery").appendChild(p);
         document.getElementById("data").value="Generate Query";
-        /* document.form2.submit(); */
         document.getElementById("queryData").value = query;
         document.getElementById("form2").submit();
-       
         alert(query)
       }
     </script>
@@ -260,7 +258,6 @@ header {
 	%>
 	<div class="w3-container">
 	<header><h1>Customized Report Progress</h1></header>
-	<p><i class="fa fa-spinner w3-spin" style="font-size:64px"></i></p>
 	</div>
 	<table>
 		<tr>
@@ -314,6 +311,7 @@ header {
 				<%} %>
 				</select>
     	<div id="rowsGoHere"></div>
+    	
 		<%-- <div id="tablesDiv">
 		<table id="table">
 		<tr>

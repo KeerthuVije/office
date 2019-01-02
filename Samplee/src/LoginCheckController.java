@@ -47,6 +47,8 @@ public class LoginCheckController extends HttpServlet {
 		GetDBData table = new GetDBData();
 		
 		String getQuery = request.getParameter("queryData");
+		table.getData(getQuery);
+		request.setAttribute("getQuery",getQuery);
 		
 		System.out.println("PRINT QUERY HERE : "+getQuery);
 		
@@ -73,7 +75,10 @@ public class LoginCheckController extends HttpServlet {
 		}*/
 		
 		List<String> c = table.getTableColumns(selecttable);
-		request.setAttribute("column_names", c);	
+		request.setAttribute("column_names", c);
+		
+		List<String> d = table.getData(getQuery);
+		request.setAttribute("data_values", d);
 		
 		List<String> a = table.getTables();
 		request.setAttribute("last_table", a);
