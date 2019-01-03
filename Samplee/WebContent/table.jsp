@@ -223,7 +223,7 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
         document.getElementById("data").value="Generate Query";
         document.getElementById("queryData").value = query;
         document.getElementById("form2").submit();
-        alert(query)
+        //alert(query)
       }
     </script>
 <style >

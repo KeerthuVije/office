@@ -2,7 +2,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class GetDBData {
 
@@ -11,7 +10,7 @@ public class GetDBData {
 		try {			
 			Connection con = DBConnection.ConnectDb();
 		    Statement state1 = con.createStatement();
-		    String query = " SELECT table_name  FROM user_tables";
+		    String query = " SELECT table_name  FROM user_tables order by  table_name asc";
 		    ResultSet result1;		      
 		    result1 = state1.executeQuery(query);
 		    while (result1.next()) {			        	  
@@ -45,28 +44,38 @@ public class GetDBData {
 		return getColumns;
 	}
 	
-	public ArrayList<String> getData(String getQuery ) {		
-		ArrayList<String> getData =  new ArrayList<String>();			
-		try {			
+	public ArrayList<String> getData(String getQuery ) {
+		ArrayList<ArrayList<String>> allData =  new ArrayList<ArrayList<String>>();
+		ArrayList<String> getDatas =  new ArrayList<String>();
+		Functions obj = new Functions();
+		try {	
 			Connection con = DBConnection.ConnectDb();
-		    Statement state1 = con.createStatement();
-		    //String query1 = "'"+getQuery+"'";
-		    String query1 = "SELECT DISTINCT SUB_ACC_NAME,REMARKS,STATUS FROM GL_SUB_ACCOUNT";
+		    Statement state1 = con.createStatement();		     		    
 		    ResultSet result1;		      
-		    result1 = state1.executeQuery(query1);
-		   // System.out.println(query1);
+		    result1 = state1.executeQuery(getQuery);
+		    String[] column = obj.getColunms(getQuery);		    
 		    while (result1.next()) {
-		    	getData.add(result1.getString("SUB_ACC_NAME"));
-		    	String d1 = result1.getString(1);
-		    	String d2 = result1.getString(2);
-		    	String d3 = result1.getString(3);
-		    	System.out.println(d1);
-		    	System.out.println(d2);
-		    	System.out.println(d3);
-		    }		           		          
+		    	for(int i = 0 ;i < column.length;i++ ) {
+		    		getDatas.add( result1.getString(column[i]));
+		    	}
+		    	allData.add(getDatas);
+		    }
+		    
+		    for(int i = 0 ;i < allData.size();i++ ) {
+		    	for(int j = 0 ;j < getDatas.size();j++ ) {
+		    		//allData.get(i).get(j);
+		    	}
+		    	System.out.println(allData.get(i));
+	    	}
+		    
+		   /* for(ArrayList<String> s2:allData) {
+		    	System.out.println(s2);
+		    }*/
+		    
 		}catch(Exception e) {
 			System.err.println(e);
 		}
-		return getData;
+		return getDatas;
 	}
+	
 }
