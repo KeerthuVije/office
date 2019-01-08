@@ -44,9 +44,9 @@ public class GetDBData {
 		return getColumns;
 	}
 	
-	public ArrayList<String> getData(String getQuery ) {
+	public ArrayList<ArrayList<String>> getData(String getQuery ) {
 		ArrayList<ArrayList<String>> allData =  new ArrayList<ArrayList<String>>();
-		ArrayList<String> getDatas =  new ArrayList<String>();
+		//ArrayList<String> getDatas =  new ArrayList<String>();
 		Functions obj = new Functions();
 		try {	
 			Connection con = DBConnection.ConnectDb();
@@ -55,27 +55,27 @@ public class GetDBData {
 		    result1 = state1.executeQuery(getQuery);
 		    String[] column = obj.getColunms(getQuery);		    
 		    while (result1.next()) {
+		    	ArrayList<String> getDatas =  new ArrayList<String>();
 		    	for(int i = 0 ;i < column.length;i++ ) {
 		    		getDatas.add( result1.getString(column[i]));
-		    	}
+		    	}	
 		    	allData.add(getDatas);
 		    }
 		    
-		    for(int i = 0 ;i < allData.size();i++ ) {
-		    	for(int j = 0 ;j < getDatas.size();j++ ) {
-		    		//allData.get(i).get(j);
-		    	}
-		    	System.out.println(allData.get(i));
-	    	}
+//		    for(int i = 0 ;i < allData.size();i++ ) {
+//		    	for(int j = 0 ;j < getDatas.size();j++ ) {		    		
+//		    	}	
+//		    	System.out.print(allData.get(i));
+//	    	}
 		    
-		   /* for(ArrayList<String> s2:allData) {
+		   for(ArrayList<String> s2:allData) {
 		    	System.out.println(s2);
-		    }*/
+		    }
 		    
 		}catch(Exception e) {
 			System.err.println(e);
 		}
-		return getDatas;
+		return allData;
 	}
 	
 }

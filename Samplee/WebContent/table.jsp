@@ -26,6 +26,7 @@
 		document.getElementById("form1").submit();
 	}
 </script>
+
 <script>
 var clicks = 0;
 var length = 0;
@@ -63,7 +64,7 @@ function addRow() {
 								<td>
 									<ul>
 										<select id="option`+clicks+`">
-											<option value = ""> -- Select -- </option>
+											<option value = ""> Select  </option>
 											<option value= ">"> > </option>
 											<option value= "<"> < </option>
 											<option value= "="> = </option>
@@ -226,6 +227,7 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
         //alert(query)
       }
     </script>
+    
 <style >
 .button1 {
 	background-color: #4CAF50;
@@ -365,7 +367,7 @@ header {
 	 <tr>
 	 	<td> 
 	 		<h1><b><font size="5"> Group By </b></font></h1>
-	 			<select id="groupby" name="select" multiple="multiple">
+	 			<select id="groupby" name="groupby" multiple="multiple">
 					<%for(int i = 0; i < listc.size(); i++){ 
 							String columns = listc.get(i);%>
 						<option value="<%=columns %>"><%= columns%></option>	
@@ -381,7 +383,7 @@ header {
 	</tr>
 		<td> 
 	 		<h1><b><font size="5"> Order By </b></font></h1>
-	 			<select id="orderby" name="select" multiple="multiple">
+	 			<select id="orderby" name="orderby" multiple="multiple">
 					<%for(int i = 0; i < listc.size(); i++){ 
 							String columns = listc.get(i);%>
 						<option value="<%=columns %>"><%= columns%></option>	
@@ -414,5 +416,19 @@ header {
 	 </tr>
 	 </table>
 	 </div>
+	 
+	 <table>
+	 	<tr>
+	 	<%for(int i=0;i<4;i++){
+	 		for(int j=0;j<2;j++){
+		 System.out.println("col"+i);
+		 %>
+		 <%} %>
+	 <%} %>
+	 </tr>
+	 	<tr>col2
+	 	<td>data2</td>
+	 	</tr>	 	
+	 </table>
 </body>
 </html>

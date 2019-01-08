@@ -1,6 +1,7 @@
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -65,13 +66,17 @@ public class LoginCheckController extends HttpServlet {
 	}
 	
 	public void GenerateQuery(HttpServletRequest request, HttpServletResponse response) {
-		GetDBData table = new GetDBData();	
+		GetDBData query = new GetDBData();
+//		Functions splitcolumn = new Functions();
 		String getQuery = request.getParameter("queryData");
-		table.getData(getQuery);
+		query.getData(getQuery);
 		request.setAttribute("getQuery",getQuery);
 		System.out.println("PRINT QUERY HERE : "+getQuery);
 		
-		/*List<String> d = table.getData(getQuery);
-		request.setAttribute("data_values", d);*/
+		List<ArrayList<String>> d = query.getData(getQuery);
+		request.setAttribute("data_values", d);
+		
+//		String[] c = splitcolumn.getColunms(getQuery);
+//		request.setAttribute("split_columns",c);
 	}
 }
