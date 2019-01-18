@@ -119,88 +119,8 @@ function addRow() {
   }
 }
 </script>   	
-<%-- <script>
-	var clicks = 0;
-	 var count = 0;
-     var rowCount = 1;
-	document.addEventListener(
-	        "DOMContentLoaded",
-	        function() {
-	          count = document.getElementById("colunm").options.length;
-	        },
-	        true
-	      );
-<%
-List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
-%>
-		function onPlusClick(){	
-			clicks += 1;
-			if (count <= rowCount)
-		          document.getElementById("addButton").disabled = true;
-		        else {
-		        	var div = document.getElementById("tablesDiv");
-        	var strDOM =`<table id="table">
-			<td>
-			<select id="colunms`+clicks+`" name="select">
-			<option value = ""> -- Select -- </option>
-				<%for(int i = 0; i < listc.size(); i++){ 
-						String columns = listc.get(i);%>
-					<option value="<%=columns %>"><%= columns%></option>	
-			<%} %>
-			</select> 
-		</td>
-		<td>
-			<ul>
-				<select id="option`+clicks+`">
-				<option value = ""> -- Select -- </option>
-					<option value= ">"> > </option>
-					<option value= "<"> < </option>
-					<option value= "="> = </option>
-					<option value= "<="> <= </option>
-					<option value= ">="> >= </option>
-					<option value= "<>"> <> </option>
-					<option value= "Like"> Like </option>
-					<option value= "Between"> Between </option>
-					<option value= "ISNULL"> IS NULL </option>
-					<option value= "ISNOTNULL"> IS NOT NULL </option>
-					<option value= "IN"> IN </option>
-					<option value= "NOTIN"> NOT IN </option>
-				</select>
-			</ul>
-		</td>
-		<td>
-			<ul>
-				Value : <input id="text`+clicks+`" type="text" name="value">
-			</ul>
-		</td>
-		<td><ul><input id="datepicker`+clicks+`" type="date"></ul></td>
-		<td><ul><input id="number" type="number"></ul></td>
-	</tr>	
-</table>`
-        div.insertAdjacentHTML("beforeend", strDOM);
-        rowCount++;
-		}
-	}
- </script> --%> 
- <!-- <script>
-      $(document).ready(() => {
-        $("#butCreateQuery").click(event => {
-          //var selectedTable = $("#tblList").val();
-          //var selectedColumns = $("#colunm").val();
-      	  //var query = "SELECT "+${selectedColumns}+" FROM"+ ${selectedTable};
-      	var t =  $('#tblList :selected').text();
-     	var c =  $('#colunm :selected').text();
-       	var query = "Select "+ c +" From "+ t;
-       	var p = document.createElement("p");
-        var node = document.createTextNode(query);
-        p.appendChild(node);
-        document.body.appendChild(p);
-        document.getElementById("demo").appendChild(p);  
-        });
-      });
-   </script> -->
-   <script>
-   var clicks = 0;
+<script>
+   	 	var clicks = 0;
       function onButCreateQueryClick() {
     	  clicks += 1;
         var selectedTable = document.getElementById("tblList").value;
@@ -214,20 +134,28 @@ List<String> listc = (ArrayList<String>) request.getAttribute("column_names");
             selectedColumns.push(opt.value);
         }
         var query = "SELECT " + selectedColumns + " FROM " + selectedTable;
-        var p = document.createElement("p");
+        /* var p = document.createElement("p");
         p.setAttribute("id", "para");
         p.setAttribute("name", "para");
         var node = document.createTextNode(query);
         p.appendChild(node);
         document.body.appendChild(p);
-        document.getElementById("divquery").appendChild(p);
+        document.getElementById("divquery").appendChild(p); */
         document.getElementById("data").value="Generate Query";
         document.getElementById("queryData").value = query;
         document.getElementById("form2").submit();
-        //alert(query)
       }
-    </script>
+</script>
     
+<%
+ArrayList<ArrayList<String>> listdata = (ArrayList<ArrayList<String>>) request.getAttribute("data_values");
+%>
+
+<%
+String[] header = (String[]) request.getAttribute("split_columns");
+%>
+
+
 <style >
 .button1 {
 	background-color: #4CAF50;
@@ -292,7 +220,9 @@ header {
 					<%for(int i = 0; i < listc.size(); i++){ 
 							String columns = listc.get(i);%>
 						<option value="<%=columns %>"><%= columns%></option>	
-				<%} %>
+				<%
+				}
+					%>
 				</select> 				
 			    <script>
 			        $("#colunm").multipleSelect({
@@ -313,54 +243,6 @@ header {
 				<%} %>
 				</select>
     	<div id="rowsGoHere"></div>
-    	
-		<%-- <div id="tablesDiv">
-		<table id="table">
-		<tr>
-			<td>
-				<select id="colunms" name="select">
-				<option value = ""> -- Select -- </option>
-					<%for(int i = 0; i < listc.size(); i++){ 
-							String columns = listc.get(i);%>
-						<option value="<%=columns %>"><%= columns%></option>	
-				<%} %>
-				</select> 
-			</td>
-			<td>
-				<ul>
-					<select id="option">
-						<option value = ""> -- Select -- </option>
-						<option value= ">"> > </option>
-						<option value= "<"> < </option>
-						<option value= "="> = </option>
-						<option value= "<="> <= </option>
-						<option value= ">="> >= </option>
-						<option value= "<>"> <> </option>
-						<option value= "Like"> Like </option>
-						<option value= "Between"> Between </option>
-						<option value= "ISNULL"> IS NULL </option>
-						<option value= "ISNOTNULL"> IS NOT NULL </option>
-						<option value= "IN"> IN </option>
-						<option value= "NOTIN"> NOT IN </option>
-					</select>
-				</ul>
-			</td>
-			<td>
-				<ul>
-					Value : <input id="text" type="text" name="value">
-				</ul>
-			</td>
-			<td><ul><input id="datepicker" type="date"></ul></td>
-			<td><ul><input id="number" type="number"></ul></td>
-			<td>
-				<ul>				
-					<button onclick="onPlusClick();" class="button button1" id="addButton"> + </button>				
-				
-				</ul>
-			</td>
-			</tr>
-	</table>
-	 </div> --%>
 	 
 	 <div>
 	 <table>
@@ -407,28 +289,33 @@ header {
 		</td>
 	 </tr>
 	 	<td><div id="divquery"></div>
-	 <!-- <tr>
-	 	<td><button class="button button2">Submit</button></td>
-	 </tr> -->
-	 <tr>
-	 	<td><button class="button button2">Get Report</button>
-	 </td>
-	 </tr>
 	 </table>
 	 </div>
 	 
-	 <table>
+	 <table width="100%" border="1">
 	 	<tr>
-	 	<%for(int i=0;i<4;i++){
-	 		for(int j=0;j<2;j++){
-		 System.out.println("col"+i);
-		 %>
-		 <%} %>
-	 <%} %>
-	 </tr>
-	 	<tr>col2
-	 	<td>data2</td>
-	 	</tr>	 	
+		 	<%
+		 	if(header != null){
+			 	for(int i =0; i < header.length;i++){ %>
+			 		<th><%=header[i] %></th>
+			 	<%}
+		 	} %>
+	 	</tr>
+	 	
+			<%
+			if(listdata != null){
+				for(int j =0; j < listdata.size();j++){ %>
+					<tr>
+						<%
+						for(int k = 0; k < listdata.get(j).size();k++){ 
+						%>
+							<td><%=listdata.get(j).get(k) %></td>
+						<%} 
+						%>
+					</tr>
+				<%}
+			} %>
+	 		
 	 </table>
 </body>
 </html>

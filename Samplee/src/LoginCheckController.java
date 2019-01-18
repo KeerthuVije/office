@@ -67,16 +67,15 @@ public class LoginCheckController extends HttpServlet {
 	
 	public void GenerateQuery(HttpServletRequest request, HttpServletResponse response) {
 		GetDBData query = new GetDBData();
-//		Functions splitcolumn = new Functions();
+		Functions splitcolumn = new Functions();
 		String getQuery = request.getParameter("queryData");
 		query.getData(getQuery);
 		request.setAttribute("getQuery",getQuery);
-		System.out.println("PRINT QUERY HERE : "+getQuery);
 		
-		List<ArrayList<String>> d = query.getData(getQuery);
+		ArrayList<ArrayList<String>> d = query.getData(getQuery);
 		request.setAttribute("data_values", d);
 		
-//		String[] c = splitcolumn.getColunms(getQuery);
-//		request.setAttribute("split_columns",c);
+		String[] c = splitcolumn.getColunms(getQuery);
+		request.setAttribute("split_columns",c);
 	}
 }

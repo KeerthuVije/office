@@ -46,7 +46,6 @@ public class GetDBData {
 	
 	public ArrayList<ArrayList<String>> getData(String getQuery ) {
 		ArrayList<ArrayList<String>> allData =  new ArrayList<ArrayList<String>>();
-		//ArrayList<String> getDatas =  new ArrayList<String>();
 		Functions obj = new Functions();
 		try {	
 			Connection con = DBConnection.ConnectDb();
@@ -69,7 +68,7 @@ public class GetDBData {
 //	    	}
 		    
 		   for(ArrayList<String> s2:allData) {
-		    	System.out.println(s2);
+		    	//System.out.println(s2);
 		    }
 		    
 		}catch(Exception e) {
