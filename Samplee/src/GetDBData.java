@@ -61,14 +61,8 @@ public class GetDBData {
 		    	allData.add(getDatas);
 		    }
 		    
-//		    for(int i = 0 ;i < allData.size();i++ ) {
-//		    	for(int j = 0 ;j < getDatas.size();j++ ) {		    		
-//		    	}	
-//		    	System.out.print(allData.get(i));
-//	    	}
-		    
 		   for(ArrayList<String> s2:allData) {
-		    	//System.out.println(s2);
+		    	
 		    }
 		    
 		}catch(Exception e) {

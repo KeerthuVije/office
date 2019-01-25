@@ -234,6 +234,7 @@ header {
 			</td>
 			</table>
 		<h1><b><font size="5">Select Conditions </font></b></h1>
+		<button size ="3" class="button button1 id="initialWhere" onclick="initialWhere()">Add Where Clause </button>
 		<button onclick="addRow()" id="addB" class="button button1">+</button>
     	<select id="cols" name="select">
 					<option value = ""> -- Select -- </option>
@@ -288,7 +289,7 @@ header {
 			</form>
 		</td>
 	 </tr>
-	 	<td><div id="divquery"></div>
+	 	<div id="divquery"></div>
 	 </table>
 	 </div>
 	 
