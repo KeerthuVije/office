@@ -10,5 +10,7 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="D:/temp apache/apache-tomcat-7.0.54/lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="D:/temp apache/apache-tomcat-7.0.54/lib/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/DynamicJasper/DynamicJasper-5.0.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
