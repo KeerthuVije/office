@@ -1,3 +1,4 @@
+package reportGenerate;
 
 public class Functions {
 	public String[] getColunms(String getQuery) {

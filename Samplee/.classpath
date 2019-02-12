@@ -15,5 +15,17 @@
 	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/DynamicJasper/jasperreports-6.5.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/DynamicJasper/DynamicJasper-5.0.4-tests.jar"/>
 	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/DynamicJasper/commons-logging-1.0.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/new_jarfiles/commons-beanutils-1.7.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/new_jarfiles/commons-collections-3.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/new_jarfiles/commons-digester-1.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/new_jarfiles/commons-logging-1.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/new_jarfiles/DynamicJasper-5.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/new_jarfiles/DynamicJasper-5.0.4-tests.jar"/>
+	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/new_jarfiles/iText-2.1.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/new_jarfiles/jasperreports-5.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/new_jarfiles/javax.xml.jaxp.jar"/>
+	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/new_jarfiles/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/new_jarfiles/jdtcore-3.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/new_jarfiles/jxl-2.6.12.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
