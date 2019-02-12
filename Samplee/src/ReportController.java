@@ -12,16 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoginCheck
+ * Servlet implementation class ReportCheck
  */
-@WebServlet("/LoginCheck")
-public class LoginCheckController extends HttpServlet {
+@WebServlet("/ReportCheck")
+public class ReportController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginCheckController() {
+    public ReportController() {
         super();
         
     }
@@ -49,10 +49,12 @@ public class LoginCheckController extends HttpServlet {
 			selecttable = request.getParameter("selecttable");
 			table.getTableColumns(selecttable);
 			request.setAttribute("selecttable",selecttable);			
-		} 
+		}
 		
 		if(request.getParameter("data") != null && request.getParameter("data").equals("Generate Query")) {
 			this.GenerateQuery(request,response);
+			String[] columns=request.getParameterValues("select");
+			System.out.println(columns);
 		}
 		
 		List<String> c = table.getTableColumns(selecttable);
@@ -75,7 +77,7 @@ public class LoginCheckController extends HttpServlet {
 		ArrayList<ArrayList<String>> d = query.getData(getQuery);
 		request.setAttribute("data_values", d);
 		
-		String[] c = splitcolumn.getColunms(getQuery);
+		String[] c = splitcolumn.getColunms(getQuery); 
 		request.setAttribute("split_columns",c);
 	}
 }

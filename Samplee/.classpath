@@ -12,5 +12,8 @@
 	<classpathentry kind="lib" path="D:/temp apache/apache-tomcat-7.0.54/lib/ojdbc6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/DynamicJasper/DynamicJasper-5.0.4.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/DynamicJasper/jasperreports-6.5.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/DynamicJasper/DynamicJasper-5.0.4-tests.jar"/>
+	<classpathentry kind="lib" path="C:/Users/keerthanav/Desktop/DynamicJasper/commons-logging-1.0.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

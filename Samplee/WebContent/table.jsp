@@ -205,7 +205,7 @@ header {
 			</td>
 			<td>
 				<h1><b><font size="4"> Selected Table</b></font></h1>
-				<form id="form1" action="LoginCheckController" method="get">
+				<form id="form1" action="ReportController" method="get">
 						<input type="hidden" name="page" value="submit">
 						<input type="hidden" id="selecttable" name="selecttable" value="">
 						<input type="hidden" id="test" name="test" value="yes">								
@@ -282,7 +282,7 @@ header {
 		</td>	
 	 <tr>
 	 	<td>
-	 		<form id="form2" action="LoginCheckController" method="get">
+	 		<form id="form2" action="ReportController" method="get">
 	 		<input type="button" id="butCreateQuery" onclick="onButCreateQueryClick()" class="button button2" value="Generate Query">
 			<input type="hidden" id="data" name="data" value="">
 			<input type="hidden" id="queryData" name="queryData" value="">					

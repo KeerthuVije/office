@@ -37,7 +37,7 @@ public class GetDBData {
 		    	String s2 = result1.getString(2);
 		    	System.out.println(s1);
 		    	System.out.println(s2);*/
-		    }		           		          
+		    }
 		}catch(Exception e) {
 			System.err.println(e);
 		}
